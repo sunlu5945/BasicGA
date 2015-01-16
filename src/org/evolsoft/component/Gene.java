@@ -3,15 +3,14 @@ package org.evolsoft.component;
 public abstract class Gene {
 	Object value;
 	public int getInt() {
-		return (int)this.value;
+		return Integer.parseInt(this.value.toString());
 	}
 	public double getDouble() {
-		return (double)this.value;
+		return Double.parseDouble(this.value.toString());
 	}
-	public String getString() {
-		return (String)this.value;
-	}
+	public abstract String getString();
 	public void set(Object value) {
 		this.value = value;
 	}
+	public abstract Gene clone();
 }

@@ -58,5 +58,12 @@ public class Code {
 	public Gene getGene(int id) {
 		return codeList.get(id);
 	}
+	public Code clone(){
+		Code res = new Code();
+		for(int i=0; i<codeList.size(); i++){
+			res.addGene(codeList.get(i).clone());
+		}
+		return res;
+	}
 
 }

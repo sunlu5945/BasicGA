@@ -11,4 +11,13 @@ public class StringGene extends Gene{
 	public String getString() {
 		return this.value;
 	}
+
+	@Override
+	public Gene clone() {
+		Gene res = new StringGene();
+		res.set(value);
+		return res;
+	}
+
+
 }

@@ -38,14 +38,23 @@ public class Individual implements Cloneable{
 	public Object getSolution() {
 		return this.solution;
 	}
-	public Object clone(){
-	    Object o=null;    
-	    try {    
-	    	o=(Individual)super.clone();    
-	    }    
-	    catch(CloneNotSupportedException e) {    
-	        System.out.println(e.toString());    
-	    }    
-	    return o;    
-	}    
+
+	public Individual clone(){
+		Individual res = new Individual();
+		for(int i=0; i<codeSection.size(); i++){
+			res.addSection(codeSection.get(i).clone());
+		}
+		res.setFitness(fitness);
+		res.setSolution(solution);
+		return res;
+	}
+	public void showIndivdual(String context){
+		for(int i=0; i<codeSection.size(); i++){
+			context = context + '\n';
+			for(int j=0; j<codeSection.get(i).getSize();j++){
+				context += codeSection.get(i).getGene(j).getString() + "  ";
+			}
+		}
+		System.out.println(context);
+	}
 }

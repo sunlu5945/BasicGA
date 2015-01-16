@@ -11,4 +11,14 @@ public class IntGene extends Gene{
 	public int getInt() {
 		return this.value;
 	}
+
+	@Override
+	public Gene clone() {
+		IntGene res = new IntGene();
+		res.set(value);
+		return res;
+	}
+	public String getString(){
+		return ""+value;
+	}
 }
