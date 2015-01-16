@@ -21,6 +21,12 @@ public abstract class Function {
 	public int getDimension(){
 		return dimension;
 	}
+	public double getLbound(){
+		return lbound;
+	}
+	public double getUbound(){
+		return ubound;
+	}
 	public Code getShiftedSolution(Code code){
 		Code res = new Code();
 		for(int i=0; i<dimension; i++){
