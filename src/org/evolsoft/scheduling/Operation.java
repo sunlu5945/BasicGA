@@ -9,11 +9,12 @@ public class Operation {
 	private double startingTime;
 	private double endingTime;
 	private double processingTime;
+	//todo 继承后添加一个 map，用来存该操作在所有机器上的时间，用一个decode函数根据染色体确定当前的processingTime
 
 	private List<Integer> importOperationIdList;
 	private List<Integer> exportOperationIdList;
 	private List<Resource> resourceList;
-	
+
 	public Operation() {
 		importOperationIdList = new ArrayList();
 		exportOperationIdList = new ArrayList();
@@ -44,6 +45,7 @@ public class Operation {
 	public void setProcessingTime(double processingTime) {
 		this.processingTime = processingTime;
 	}
+	//todo 改成获取获取随机的时间值
 	public double getProcessingTime() {
 		return this.processingTime;
 	}

@@ -1,11 +1,13 @@
 package org.evolsoft.problem.jsp;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.evolsoft.component.Code;
 import org.evolsoft.scheduling.Operation;
 import org.evolsoft.scheduling.Schedule;
+
+import java.util.ArrayList;
+import java.util.List;
+/*todo 这里要改，写另外一个函数调用这个函数，在那个函数里面，根据染色体确定一个和现有 Jsp 同构的对象
+* */
 
 public class JspDecode {
 	public static Schedule intPriorityDecode(Code intPriorityCode, Jsp jspData) {
