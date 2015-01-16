@@ -6,10 +6,10 @@ import org.evolsoft.component.Code;
  * Created by wwhh on 2015/1/16.
  */
 public abstract class Function {
-	public double lbound;
-	public double ubound;
-	public int dimension;
-	public Code globalOptimum;
+	private double lbound;
+	private double ubound;
+	private int dimension;
+	private Code globalOptimum;
 	public abstract double run(Code code);
 
 	public void setGlobalOptimum(Code code){
