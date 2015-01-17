@@ -40,7 +40,15 @@ public class Encode {
 			}
 		}
 		return code;
-	}	
+	}
+	public static Code createCodewithBound(int dimension,int lbound, int ubound){
+		Code code = new Code();
+		Random random = new Random();
+		for(int i=0; i<dimension; i++){
+			code.addGene(lbound + (ubound - lbound) * random.nextDouble());
+		}
+		return code;
+	}
 	public static void printIntCode(Code code) {
 		
 		for(int i=0; i<code.getSize(); i++) {

@@ -24,4 +24,14 @@ public class Initialization {
 		}
 		return population;
 	}
+	public static Population populationInitialization(int popSize, int dimension, int lbound, int ubound){
+		Population population = new Population();
+		for(int i=0; i<popSize; i++){
+			Individual individual = new Individual();
+			Code code = Encode.createCodewithBound(dimension, lbound, ubound);
+			individual.addSection(code);
+			population.addIndividual(individual);
+		}
+		return population;
+	}
 }
