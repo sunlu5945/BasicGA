@@ -5,8 +5,7 @@ public class Test {
 
 	public static void main(String[] args) {
 		CCFrame test = new CCFrame(new Function_1());
-		test.grouping(100);
-		test.showAllGroups("test");
+		test.CCRun(1000, 50 , 10000000, 1);
 	}
 
 }

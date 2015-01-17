@@ -92,7 +92,7 @@ public class CCFrame {
 		}
 		System.out.println(arg);
 	}
-	public void CCRun(int dimension, int popSize, int iteration){
+	public void CCRun(int dimension, int popSize, int iteration, int interval){
 		grouping(dimension);
 		Population pop = Initialization.populationInitialization(popSize, dimension, function.getLbound(), function.getUbound());
 		Individual best = getMinIndividual(pop);
@@ -108,8 +108,8 @@ public class CCFrame {
 				pop = setSubPop(pop, subPop, indices);
 				best = getMinIndividual(pop);
 
-				if(i % 25 == 0){
-					System.out.println(""+ i + "th iteration" + best.getFitness() );
+				if(i % interval == 0){
+					System.out.println(""+ i + "th iteration  " + best.getFitness() );
 				}
 			}
 		}
