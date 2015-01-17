@@ -41,7 +41,7 @@ public class Encode {
 		}
 		return code;
 	}
-	public static Code createCodewithBound(int dimension,int lbound, int ubound){
+	public static Code createCodeWithBound(int dimension,double lbound, double ubound){
 		Code code = new Code();
 		Random random = new Random();
 		for(int i=0; i<dimension; i++){

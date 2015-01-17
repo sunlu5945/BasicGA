@@ -24,11 +24,11 @@ public class Initialization {
 		}
 		return population;
 	}
-	public static Population populationInitialization(int popSize, int dimension, int lbound, int ubound){
+	public static Population populationInitialization(int popSize, int dimension, double lbound, double ubound){
 		Population population = new Population();
 		for(int i=0; i<popSize; i++){
 			Individual individual = new Individual();
-			Code code = Encode.createCodewithBound(dimension, lbound, ubound);
+			Code code = Encode.createCodeWithBound(dimension, lbound, ubound);
 			individual.addSection(code);
 			population.addIndividual(individual);
 		}
