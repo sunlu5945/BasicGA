@@ -1,6 +1,9 @@
 package org.evolsoft.ccSaNSDE;
 
 import org.evolsoft.component.Code;
+import org.evolsoft.component.Individual;
+import org.evolsoft.component.Initialization;
+import org.evolsoft.component.Population;
 import org.evolsoft.functions.Function;
 
 import java.util.ArrayList;
@@ -89,4 +92,64 @@ public class CCFrame {
 		}
 		System.out.println(arg);
 	}
+	public void CCRun(int dimension, int popSize, int iteration){
+		grouping(dimension);
+		Population pop = Initialization.populationInitialization(popSize, dimension, function.getLbound(), function.getUbound());
+		Individual best = getMinIndividual(pop);
+		ArrayList<SaNSDE> optimizers = new ArrayList<SaNSDE>();
+		for(int i=0; i<allGroups.size(); i++){
+			optimizers.add(new SaNSDE(popSize, function));
+		}
+		for(int i=1; i<=iteration; i++){
+			for(int j=0; j<allGroups.size(); j++){
+				ArrayList<Integer> indices = allGroups.get(j);
+				Population subPop = getSubPop(pop, indices);
+				subPop = optimizers.get(j).optimizer(best, subPop, indices, i);
+				pop = setSubPop(pop, subPop, indices);
+				best = getMinIndividual(pop);
+
+				if(i % 25 == 0){
+					System.out.println(""+ i + "th iteration" + best.getFitness() );
+				}
+			}
+		}
+
+
+	}
+	private Individual getMinIndividual(Population pop){
+		int index = -1;
+		double bestFitness = Double.MAX_VALUE;
+		for(int i=0; i<pop.getSize(); i++){
+			double tempFitness = function.run(pop.getIndividual(i).getSection(0));
+			pop.getIndividual(i).setFitness(tempFitness);
+			if(tempFitness < bestFitness){
+				index = i;
+				bestFitness = tempFitness;
+			}
+		}
+		return pop.getIndividual(index).clone();
+	}
+	public Population getSubPop(Population pop, ArrayList<Integer> indices){
+		Population subPop = new Population();
+		for(int i=0; i<pop.getSize(); i++){
+			Individual individual = new Individual();
+			Code code = new Code();
+			for(int j=0; j<indices.size(); j++){
+				code.addGene(pop.getIndividual(i).getSection(0).getDoubleGene(indices.get(j)));
+			}
+			individual.addSection(code);
+			subPop.addIndividual(individual);
+		}
+		return subPop;
+	}
+	public Population setSubPop(Population pop, Population subPop, ArrayList<Integer> indices){
+		for(int i=0; i<pop.getSize(); i++){
+			for(int j=0; j<indices.size(); j++){
+				pop.getIndividual(i).getSection(0).setGene(indices.get(j),
+						subPop.getIndividual(i).getSection(0).getDoubleGene(j));
+			}
+		}
+		return pop;
+	}
+
 }
