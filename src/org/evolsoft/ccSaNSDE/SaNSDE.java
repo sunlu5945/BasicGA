@@ -13,28 +13,28 @@ import java.util.Random;
  * Created by wwhh on 2015/1/17.
  */
 public class SaNSDE {
-	int groupSize; //种群大小
-	Function function;
+	private int groupSize; //种群大小
+	private Function function;
 
 	/*用于p的更新*/
-	double P;
-	int indicatorOfP[];//用来指示本次世代用的是哪个公式 1:(1),2:(3)
-	int Pns1;
-	int Pns2;
-	int Pnf1;
-	int Pnf2;
+	private double P;
+	private int indicatorOfP[];//用来指示本次世代用的是哪个公式 1:(1),2:(3)
+	private int Pns1;
+	private int Pns2;
+	private int Pnf1;
+	private int Pnf2;
 	/*用于权重的概率值的更新*/
-	double FP;
-	int indicatorOfFP[];//用来指示本次世代用的是哪个分布,1:normal, 2:cauchy
-	int Fns1;
-	int Fns2;
-	int Fnf1;
-	int Fnf2;
+	private double FP;
+	private int indicatorOfFP[];//用来指示本次世代用的是哪个分布,1:normal, 2:cauchy
+	private int Fns1;
+	private int Fns2;
+	private int Fnf1;
+	private int Fnf2;
 	/*用于变异率的更新*/
-	double CRm;
-	double CR[];
-	ArrayList<Double> deltaFunc_rec;
-	ArrayList<Double> CR_rec;
+	private double CRm;
+	private double CR[];
+	private ArrayList<Double> deltaFunc_rec;
+	private ArrayList<Double> CR_rec;
 
 	public SaNSDE(int groupSize, Function function){
 		this.groupSize = groupSize;
@@ -121,7 +121,7 @@ public class SaNSDE {
 		return res;
 
 	}
-	public int getSubPopBest(Individual best, Population subPop, ArrayList<Integer> indices){
+	private int getSubPopBest(Individual best, Population subPop, ArrayList<Integer> indices){
 		Individual replacedBest = replace(best, subPop.getIndividual(0), indices);
 		double bestFitness = function.run(replacedBest.getSection(0));
 		int index = 0;
@@ -136,14 +136,14 @@ public class SaNSDE {
 		}
 		return index;
 	}
-	public Individual replace(Individual best, Individual individual, ArrayList<Integer> indices){
+	private Individual replace(Individual best, Individual individual, ArrayList<Integer> indices){
 		Individual res = best.clone();
 		for(int i=0; i<indices.size(); i++){
 			res.getSection(0).setGene(indices.get(i), individual.getSection(0).getDoubleGene(indices.get(i)));
 		}
 		return res;
 	}
-	public Population mutation(Individual best, Population subPop, ArrayList<Integer> indices, double[] F){
+	private Population mutation(Individual best, Population subPop, ArrayList<Integer> indices, double[] F){
 		Population res = new Population();
 		Random random = new Random();
 		for(int i=0; i<subPop.getSize(); i++) {
@@ -187,7 +187,7 @@ public class SaNSDE {
 		}
 		return res;
 	}
-	public Population crossover(Population subPop, Population candidate){
+	private Population crossover(Population subPop, Population candidate){
 		Random random = new Random();
 		Population res = new Population();
 		for(int i=0; i<subPop.getSize(); i++){
@@ -202,7 +202,7 @@ public class SaNSDE {
 		}
 		return res;
 	}
-	public Population selection(Population subPop, Population candidate, Individual best, ArrayList<Integer> indices){
+	private Population selection(Population subPop, Population candidate, Individual best, ArrayList<Integer> indices){
 		Population res = new Population();
 		for(int i=0; i<subPop.getSize(); i++){
 			Individual tempSubPop = replace(best, subPop.getIndividual(i), indices);
