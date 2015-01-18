@@ -7,13 +7,7 @@ import org.evolsoft.component.Code;
  */
 public class Function_1 extends Function {
 	public Function_1(){
-		lbound = -100;
-		ubound = 100;
-		dimension = 1000;
-		globalOptimum = new Code();
-		for(int i=0; i<dimension; i++){
-			globalOptimum.addGene(0.0);
-		}
+		super(-100, 100, 1000);
 	}
 	public double run(Code code){
 		Code shiftedSolution = getShiftedSolution(code);
