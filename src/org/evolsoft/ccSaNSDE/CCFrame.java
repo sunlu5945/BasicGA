@@ -68,7 +68,9 @@ public class CCFrame {
 				allGroups.add(group);
 			}
 		}
-		allGroups.add(seps);
+		if(seps.size() > 0){
+			allGroups.add(seps);
+		}
 
 	}
 	public Code ones(double initialValue, int dim){
@@ -108,10 +110,9 @@ public class CCFrame {
 				subPop = optimizers.get(j).optimizer(best, subPop, indices, i);
 				pop = setSubPop(pop, subPop, indices);
 				best = getMinIndividual(pop);
-
-				if(i % interval == 0){
-					System.out.println(""+ i + "th iteration  " + best.getFitness() );
-				}
+			}
+			if(i % interval == 0){
+				System.out.println(""+ i + "th iteration  " + best.getFitness() );
 			}
 		}
 

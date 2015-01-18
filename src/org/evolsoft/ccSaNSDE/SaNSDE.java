@@ -139,7 +139,7 @@ public class SaNSDE {
 	private Individual replace(Individual best, Individual individual, ArrayList<Integer> indices){
 		Individual res = best.clone();
 		for(int i=0; i<indices.size(); i++){
-			res.getSection(0).setGene(indices.get(i), individual.getSection(0).getDoubleGene(indices.get(i)));
+			res.getSection(0).setGene(indices.get(i), individual.getSection(0).getDoubleGene(i));
 		}
 		return res;
 	}
