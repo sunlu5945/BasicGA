@@ -24,7 +24,8 @@ public abstract class Function {
 		for(int i=0; i<dimension; i++){
 			globalOptimum.addGene(0.0);
 		}
-		M = RandomMatrices.createOrthogonal(dimension, dimension, new Random());
+		/*留在子类中去初始化，不同的目标函数需要不同的M*/
+		//M = RandomMatrices.createOrthogonal(dimension, dimension, new Random());
 
 	}
 
@@ -57,9 +58,9 @@ public abstract class Function {
 	}
 	public Code coordinatesRotate(Code code){
 		Code rotateCode = new Code();
-		for(int i=0; i<dimension; i++){
+		for(int i=0; i<code.getSize(); i++){
 			double temp = 0.0;
-			for(int j=0; j<dimension; j++){
+			for(int j=0; j<code.getSize(); j++){
 				temp += code.getDoubleGene(j) * M.get(j, i);
 			}
 			rotateCode.addGene(temp);
@@ -91,7 +92,7 @@ public abstract class Function {
 	public double rastriginFunction(Code code){
 		double res = 0.0;
 		double temp;
-		for(int i=0; i<dimension; i++){
+		for(int i=0; i<code.getSize(); i++){
 			temp = code.getDoubleGene(i);
 			res += temp * temp - 10 * Math.cos(2 * Math.PI * temp) + 10;
 		}
@@ -105,23 +106,23 @@ public abstract class Function {
 		double tempGene;
 		double temp1 = 0.0;
 		double temp2 = 0.0;
-		for(int i=0; i<dimension; i++){
+		for(int i=0; i<code.getSize(); i++){
 			tempGene = code.getDoubleGene(i);
 			temp1 += tempGene * tempGene;
 			temp2 += Math.cos(2 * Math.PI * tempGene);
 		}
-		temp1 = Math.sqrt(temp1/(double)dimension);
-		temp2 = temp2/(double)dimension;
+		temp1 = Math.sqrt(temp1/(double)code.getSize());
+		temp2 = temp2/(double)code.getSize();
 		res = -20 * Math.exp(-0.2 * temp1) - Math.exp(temp2) + 20 + Math.E;
 		return res;
 	}
-	public double rot_ackley(Code code){
+	public double rot_ackleyFunction(Code code){
 		return ackleyFunction(coordinatesRotate(code));
 	}
 	public double schwefelFunction(Code code){
 		double res = 0.0;
 		double tempGene;
-		for(int i=0; i<dimension; i++){
+		for(int i=0; i<code.getSize(); i++){
 			double temp = 0.0;
 			for(int j=0; j<=i; j++){
 				tempGene = code.getDoubleGene(j);
@@ -135,7 +136,7 @@ public abstract class Function {
 		double res = 0.0;
 		double tempGene1;
 		double tempGene2;
-		for(int i=0; i<dimension-1; i++){
+		for(int i=0; i<code.getSize()-1; i++){
 			tempGene1 = code.getDoubleGene(i);
 			tempGene2 = code.getDoubleGene(i + 1);
 			res += 100 * Math.pow(tempGene1 * tempGene1 - tempGene2, 2) + Math.pow(tempGene1 - 1, 2);
