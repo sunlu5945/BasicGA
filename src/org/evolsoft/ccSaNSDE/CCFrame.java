@@ -53,7 +53,7 @@ public class CCFrame {
 				p1.setGene(j, (function.getUbound() + function.getLbound()) / 2.0);
 				p2.setGene(j, (function.getUbound() + function.getLbound()) / 2.0);
 				double delta2 = function.run(p1) - function.run(p2);
-				if(delta1 - delta2 > xn){
+				if(Math.abs(delta1 - delta2) > xn){
 					group.add(j);
 				}
 				p1.setGene(j, function.getLbound());
