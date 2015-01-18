@@ -1,10 +1,7 @@
 package org.evolsoft.functions;
 
 import org.ejml.data.DenseMatrix64F;
-import org.ejml.ops.RandomMatrices;
 import org.evolsoft.component.Code;
-
-import java.util.Random;
 
 /**
  * Created by wwhh on 2015/1/16.
@@ -38,7 +35,7 @@ public abstract class Function {
 		for(int i=0; i<dimension; i++){
 			globalOptimum.addGene(0.0);
 		}
-		M = RandomMatrices.createOrthogonal(dimension, dimension, new Random());
+
 	}
 	public int getDimension(){
 		return dimension;
@@ -144,5 +141,15 @@ public abstract class Function {
 		return res;
 	}
 
+	public static Code onesCode(int dimension){
+		Code code = new Code();
+		for(int i=0; i<dimension; i++){
+			code.addGene(i);
+		}
+		return code;
+	}
+	public void showM(){
+		M.print();
+	}
 
 }

@@ -22,7 +22,10 @@ public class Function_8 extends Function{
 		Code z1 = new Code();
 		for(int i=0; i<groupSize; i++){
 			z1.addGene(z.getDoubleGene(P.getIntGene(i)));
-			z.delGene(P.getIntGene(i));
+		}
+		Code z2 = new Code();
+		for(int i=groupSize; i<code.getSize(); i++){
+			z2.addGene(z.getDoubleGene(P.getIntGene(i)));
 		}
 		return rosenbrockFunction(z1) * 1e6 + sphereFunction(z);
 	}

@@ -24,10 +24,13 @@ public class Function_11 extends Function {
 			Code z1 = new Code();
 			for (int j = i * groupSize; j < (i + 1) * groupSize; j++) {
 				z1.addGene(z.getDoubleGene(P.getIntGene(j)));
-				z.delGene(P.getIntGene(j));
 			}
 			res += rot_ackleyFunction(z1);
 		}
-		return res + ackleyFunction(z);
+		Code z2 = new Code();
+		for(int i=dimension/2; i<dimension; i++){
+			z2.addGene(z.getDoubleGene(P.getIntGene(i)));
+		}
+		return res + ackleyFunction(z2);
 	}
 }
