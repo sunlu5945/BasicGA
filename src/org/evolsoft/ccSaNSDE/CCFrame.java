@@ -94,6 +94,7 @@ public class CCFrame {
 	}
 	public void CCRun(int dimension, int popSize, int iteration, int interval){
 		grouping(dimension);
+		testshow("分组完成");
 		Population pop = Initialization.populationInitialization(popSize, dimension, function.getLbound(), function.getUbound());
 		Individual best = getMinIndividual(pop);
 		ArrayList<SaNSDE> optimizers = new ArrayList<SaNSDE>();
@@ -150,6 +151,10 @@ public class CCFrame {
 			}
 		}
 		return pop;
+	}
+
+	public void testshow(String text){
+		System.out.println(text);
 	}
 
 }
