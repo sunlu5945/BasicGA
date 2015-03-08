@@ -8,5 +8,7 @@
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />
+    <orderEntry type="library" name="ejml-v01" level="project" />
+    <orderEntry type="library" name="commons-math3-3.4.11" level="project" />
   </component>
 </module>

@@ -112,7 +112,7 @@ public class JspDecode {
 
 			Operation operation = new Operation();
 			operation = jspData.getJob(jobNum).getOperation(operationNum);
-			
+
 			//starting time
 			double tempStartingTime = jobEndingTime[jobNum];
 			int tempMachineNum = operation.getRessourceAttributeID(0);
