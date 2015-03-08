@@ -78,6 +78,7 @@ public class JspDecode {
 	}
 
 	public static Schedule doublePriorityDecode(Code doublePriorityCode, Jsp jspData) {
+		doublePreDecode(doublePriorityCode, jspData);
 		Schedule schedule = new Schedule();
 		int operationId[] = new int[jspData.getMachineSize()];
 		int size = jspData.getJobSize()*jspData.getMachineSize();
@@ -170,7 +171,16 @@ public class JspDecode {
 		return schedule;
 	}
 	
-	
+	public static void doublePreDecode(Code doublePriorityCode, Jsp jspData){
+		int jobSize = jspData.getJobSize();
+		int machineSize = jspData.getMachineSize();
+		for(int i=0; i<jobSize; i++){
+			for(int j=0; j<machineSize; j++) {
+				int machineID = (int) doublePriorityCode.getDoubleGene( jobSize*machineSize + i*machineSize + j ) % machineSize;
+				jspData.getJob(i).getOperation(j).setProcessTime(machineID);
+			}
+		}
+	}
 	
 	public static void printJspSchedule(Schedule schedule) {
 		for(int i=0; i<schedule.getSize(); i++) {

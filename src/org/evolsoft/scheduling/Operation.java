@@ -1,7 +1,9 @@
 package org.evolsoft.scheduling;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Operation {
 	private int id;
@@ -10,6 +12,7 @@ public class Operation {
 	private double endingTime;
 	private double processingTime;
 	//todo 继承后添加一个 map，用来存该操作在所有机器上的时间，用一个decode函数根据染色体确定当前的processingTime
+	private Map<Integer,Double> allProcessTime;
 
 	private List<Integer> importOperationIdList;
 	private List<Integer> exportOperationIdList;
@@ -19,6 +22,7 @@ public class Operation {
 		importOperationIdList = new ArrayList();
 		exportOperationIdList = new ArrayList();
 		resourceList = new ArrayList<Resource>();
+		allProcessTime  = new HashMap<Integer, Double>();
 	}
 	
 	public void setID(int id) {
@@ -67,6 +71,13 @@ public class Operation {
 		re.setName(name);
 		re.setID(tempId);
 		resourceList.add(re);
+	}
+	public void addProcessTime(int machineID, double processingTime){
+		allProcessTime.put(machineID, processingTime);
+	}
+	public void setProcessTime(int machineID){
+		this.setRessourceAttributeID(0, machineID);
+		processingTime = allProcessTime.get(machineID);
 	}
 	
 	public void setRessourceAttributeID(int resourceId, int attributeId) {

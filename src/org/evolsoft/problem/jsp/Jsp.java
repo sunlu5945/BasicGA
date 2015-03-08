@@ -53,15 +53,19 @@ public class Jsp {
 		    for(int i=0; i<jobSize; i++) {
 	    		Job job = new Job();
 		    	for(int j=0; j<machineSize; j++) {
-					//todo 这里改成用我自己的 Operation
 		    		Operation operation = new Operation();
-		    		st.nextToken();
 		    		operation.addNewRessource("machine");
-					/*todo 在注释的地方进行修改，用继承，要用map，每个机器的ID 对应不同的时间区间*/
-		    		operation.setRessourceAttributeID(0, (int)st.nval);
-		    		st.nextToken();
-		    		operation.setProcessingTime((double)st.nval);//todo 在编号为 st.nval 的机器上进行操作的时间
-		    		operation.setID(j);
+					for(int k=0; k<machineSize; k++){
+//						operation.setRessourceAttributeID(0, (int)st.nval);
+//						st.nextToken();
+//						operation.setProcessingTime((double)st.nval);//todo 在编号为 st.nval 的机器上进行操作的时间
+						st.nextToken();
+						int machine = (int)st.nval;
+						st.nextToken();
+						double processTime = (double)st.nval;
+						operation.addProcessTime(machine, processTime);
+					}
+					operation.setID(j);
 		    		job.addOperation(operation);
 		    	}
 		    	jobList.add(job);
